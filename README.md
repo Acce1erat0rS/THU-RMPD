@@ -7,17 +7,22 @@ In order to lessen data annotation workload and enable the downstream model to c
 
 (1)	Visual Signal
 In our dataset we collected two set of visual signals with different camera from different location, which enable us to evaluate the impact of different camera has toward downstream tasks, also in the field of single camera depth estimation, the height of camera also has fundamental influence on the terminal performance. First camera is mounted on top of car roof which has a FOV of 60 degree emitting 25fps 1920*1080 resolution footage. Second camera is a GoPro Hero 8 mounted on top of engine hood alongside the LWIR camera for more accurate alignment, the camera is set to 25fps on Narrow which has a FOV of 60 degree. The raw camera footage of example frame is shown in Figure 1: Raw sensory input.
+
 (2)	Long-wave Infrared (LWIR) Thermal signal
 The most significant signal of pedestrian is their thermal signal, a FLIR VUE PRO 640 camera are set along side the RGB camera on top of the engine hood. The camera are able to detect long-wave(7.5 - 13.5 µm) infrared signal emitted by different heat source with onboard uncooled VOx microbolometer. In our configuration the camera has a FOV of 25°*19°outputting a 9fps 640*512 resolution footage(the framerate is limited to 9fps due to device export control).
+
 (3)	LiDAR 3D Point Cloud Signal
 In order to obtain a comprehensive depth information, a Velodyne HDL-64E LiDAR is deployed to collect point cloud data. In our experimental setup the lidar takes 1.9 million 3D points per second with a 26.9°vertical FOV. Each point has a azimuth resolution of 0.08°and about 0.4°vertical resolution with maximum distance of around 120m.
+
 (4)	Microphone Array 3D Audio Signal
 The behavior of pedestrian is heavily affected by the sound of the environment, when electric vehicles approach pedestrian, a mass majority of them report to be frighten. Which recently leads to related regulation about EV emitting sounds. In order to capture sound information of a specific spot, we utilized a open-sourced microphone array. The array has 4 digital microphones aligned in a cross, which each has a omnidirectional sensitivity of -26 dBFS, and overloads at 120dBSPL. The SNR of our mics is 63dB. In our experimental setup all 4 channal of single channel input are collected, and another channel with improved voice quality(far field sound enhancement and de-reverberation) processed by the onboard XVF-3000 chip from XMOS is stored as Ch0. 
+
 (5)	Positional Signal and Kinetic Signal
 The positional signal is collected with GLONASS+BEIDOU RTK system, for better accuracy only best position result during each 100ms. And also the acceleration information are collected with on board IMU.
 
 ## 1.2	Data Processing and Cleaning
 ### 1.2.1	Data Preprocessing
+
 (1)	Sound Source Localization
 In our data-preprocessing pipeline, we utilized SRP-PHAT-HSDA method  to do sound source localization(SSL) and sound source tracking(SST). The block architecture are shown in figure. XXX.
  
