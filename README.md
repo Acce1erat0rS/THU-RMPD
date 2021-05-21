@@ -9,6 +9,8 @@ To our knowledge, this is the first dataset in the field of AD and ADAS focusing
 
 All these preprocessed information provides great ground to boot up multi-model fusion and other works. And allowing researchers to quickly establish the feasibility of there proposed methods.
 
+If you are interested in this dataset, please contact me@liutianyu.cn, and I will send you the confidentiality agreement, after recieving signed agreement, I'll send you the full dataset.
+
 ## Sensory Input
 In order to lessen data annotation workload and enable the downstream model to construct a much comprehensive understanding of neighboring environment, we collect multiple sensory modalities including Visual RGB signal, Long-wave infrared thermal signal, LiDAR 3D point cloud depth signal, Microphone array 3D audio signal and telemetry signal including GLONASS and BEIDOU position information and kinetic features collected by IMU(Inertial Measuring Units).
 
@@ -18,7 +20,7 @@ In order to lessen data annotation workload and enable the downstream model to c
 In our dataset we collected two set of visual signals with different camera from different location, which enable us to evaluate the impact of different camera has toward downstream tasks, also in the field of single camera depth estimation, the height of camera also has fundamental influence on the terminal performance(Currently only one camera data is aligned and released). First camera is mounted on top of car roof which has a FOV of 60 degree emitting 25fps 1920*1080 resolution footage. Second camera is a GoPro Hero 8 mounted on top of engine hood alongside the LWIR camera for more accurate alignment, the camera is set to 25fps on Narrow which has a FOV of 60 degree. The raw camera footage of example frame is shown in Figure 1: Raw sensory input.
 
 (2)	Long-wave Infrared (LWIR) Thermal signal
-The most significant signal of pedestrian is their thermal signal, a FLIR VUE PRO 640 camera are set along side the RGB camera on top of the engine hood. The camera are able to detect long-wave(7.5 - 13.5 µm) infrared signal emitted by different heat source with onboard uncooled VOx microbolometer. In our configuration the camera has a FOV of 25°*19°outputting a 9fps 640*512 resolution footage(the framerate is limited to 9fps due to device export control).
+The most significant signal of pedestrian is their thermal signal, a FLIR VUE PRO 640 camera are set along side the RGB camera on top of the engine hood. The camera are able to detect long-wave(7.5 - 13.5 µm) infrared signal emitted by different heat source with onboard uncooled VOx microbolometer. In our configuration the camera has a FOV of 25°\*19°outputting a 9fps 640\*512 resolution footage(the framerate is limited to 9fps due to device export control).
 
 (3)	LiDAR 3D Point Cloud Signal
 In order to obtain a comprehensive depth information, a Velodyne HDL-64E LiDAR is deployed to collect point cloud data. In our experimental setup the lidar takes 1.9 million 3D points per second with a 26.9°vertical FOV. Each point has a azimuth resolution of 0.08°and about 0.4°vertical resolution with maximum distance of around 120m.
@@ -37,7 +39,6 @@ In our data-preprocessing pipeline, we utilized SRP-PHAT-HSDA method  to do soun
 ![Picture2](./images/Picture2.png)
 
 The underlying mechanism of SRP-PHAT is to search for V potential sources for each frame over a discrete space [4, 36]. For each potential source, the computed GCC-PHAT frames are filtered using a Maximu (Placeholder1)m Sliding Windows (MSW). The sum of the filtered GCC-PHAT frames for all pairs of microphones provide the acoustic energy for each direction on the discrete space, and the direction with the maximum energy corresponds to a po- tential source. To further reduce SRP-PHAT computations, and main- tain a high localization accuracy regardless of the micro- phone array shape, SRP-PHAT-HSDA adds Microphone Directivity (MD), Maximum Sliding Window Automatic Calibration (MSWAC) and Hierarchical Search(HS) for better performance.
-The localization and tracking result are shown in fig.xxx.
 
 (2)	Optical Flow Extraction
 In order to obtain motion information between frames and facilitate the representation learning method described in the following sections, we extract TV-L1 optical flow  from both RGB image and IR image. In order to ensure consistency and improve estimation speed, we used TV-L1 CUDA GPU implementation provided by OpenCV 3.4.2. The estimation result are shown below.
